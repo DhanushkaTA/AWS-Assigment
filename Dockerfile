@@ -1,12 +1,12 @@
-FROM node:20-alpine
-# RUN addgroup app && adduser -S -G app app
-# USER app
+FROM python:3.8-slim
+
 WORKDIR /app
-COPY package*.json ./
-# USER root
-# RUN chown -R app:app .
-# USER app
-RUN npm install
+
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+
 COPY . .
-EXPOSE 8000
-CMD npm start
+
+EXPOSE 5000
+
+CMD ["python", "server.py"]
